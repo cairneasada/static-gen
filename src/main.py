@@ -3,10 +3,16 @@ from textnode import TextType
 from generate import generate_page, generate_pages_recursive
 import os
 import shutil
+import sys
 
 def main():
-    copy_sources('static', 'public')
-    generate_pages_recursive("content", "template.html", "public")
+    print(f'{sys.argv}')
+    basepath = '/'
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+
+    copy_sources('static', 'docs')
+    generate_pages_recursive(basepath, "content", "template.html", "docs")
 
 def copy_sources(source, dest):
     if os.path.exists(dest):
